@@ -23,6 +23,33 @@ import sys
 import calendar
 from datetime import datetime
 
+date_input = sys.argv[1:]
+
+now = datetime.today(); year = now.year; month = now.month
+
+def error(str):
+    print(str)
+    
+def print_cal(month, year):
+    if int(month) > 12 or int(month) < 1:
+        error('invalid month, must be between 1 and 12')
+    else:
+        cal = calendar.TextCalendar(calendar.SUNDAY)
+        cal_str = cal.formatmonth(int(year), int(month))
+        print(cal_str)
+
+if len(date_input) < 1:
+    print_cal(month, year)
+else:
+    if len(date_input) > 1:
+        if len(date_input) > 2:
+            error("input must be in format: MM YYYY")
+        else:
+            print_cal(date_input[0], date_input[1])
+    else:
+        print_cal(date_input[0], year)
+
+"""
 date_input = input("14_cal.py month [year]: ")
 
 now = datetime.today(); year = now.year; month = now.month
@@ -58,3 +85,4 @@ else:
     else:
         date_list = strip_date_list_separate(date_input)
         print_cal(date_list[0], year)
+"""
